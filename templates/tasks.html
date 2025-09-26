@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-block">
+        <h1>Практические задания</h1>
+        <p>Решите следующие задачи, чтобы проверить свои знания.</p>
+    </div>
+
+    {% for task in tasks_list %}
+    <div class="task-card">
+        <span class="task-topic">{{ task.topic }}</span>
+        <p class="task-question">{{ task.question }}</p>
+        <details>
+            <summary>Показать ответ</summary>
+            <p class="task-answer">{{ task.answer }}</p>
+        </details>
+    </div>
+    {% endfor %}
+
+{% endblock %}
