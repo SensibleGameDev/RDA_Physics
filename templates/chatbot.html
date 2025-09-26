@@ -18,19 +18,7 @@
 </div>
 
 <script>
-// --- Документация ---
-// Этот скрипт управляет логикой чат-бота на стороне клиента.
-// 1. Он находит элементы HTML: форму, поле ввода и контейнер для сообщений.
-// 2. Добавляет обработчик события 'submit' на форму.
-// 3. Когда пользователь отправляет сообщение:
-//    - Отменяет стандартное поведение формы (перезагрузку страницы).
-//    - Получает текст сообщения от пользователя.
-//    - Если сообщение не пустое, отображает его в окне чата.
-//    - Отправляет асинхронный POST-запрос на серверный эндпоинт '/ask'.
-//    - В теле запроса передает сообщение пользователя в формате JSON.
-//    - Когда получает ответ от сервера, отображает сообщение от бота в окне чата.
-//    - Очищает поле ввода.
-// --- Конец документации ---
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const chatForm = document.getElementById('chat-form');
@@ -38,17 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
 
     chatForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Предотвращаем перезагрузку страницы
+        e.preventDefault(); 
 
         const userMessage = userInput.value.trim();
         if (userMessage === "") return;
 
-        // Отображаем сообщение пользователя
         addMessage(userMessage, 'user');
-        userInput.value = ""; // Очищаем поле ввода
+        userInput.value = ""; 
 
         try {
-            // Отправляем запрос на сервер
+
             const response = await fetch('/ask', {
                 method: 'POST',
                 headers: {
@@ -59,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
             
-            // Отображаем ответ бота
             addMessage(data.reply, 'bot');
 
         } catch (error) {
@@ -77,8 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
         messageElement.appendChild(p);
         
         chatBox.appendChild(messageElement);
-        chatBox.scrollTop = chatBox.scrollHeight; // Автопрокрутка вниз
+        chatBox.scrollTop = chatBox.scrollHeight; 
     }
 });
 </script>
+
 {% endblock %}
